@@ -1,6 +1,9 @@
 package user_model
 
-import "delivery-golang/common"
+import (
+	"delivery-golang/common"
+	"errors"
+)
 
 type UserCreate struct {
 	common.SQLModel `json:",inline"`
@@ -16,3 +19,9 @@ type UserCreate struct {
 func (UserCreate) TableName() string {
 	return User{}.TableName()
 }
+
+var (
+	ErrEmailExisted = common.NewCustomError(errors.New("email has already existed"),
+		"email has already existed",
+		"ErrEmailExisted")
+)
